@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alert Management - SafeCrowd Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsafecrowd6649back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-subtle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">SafeCrowd</h1>
+                        <p class="text-xs text-text-secondary">Management System</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="live_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Live Monitoring
+                        </a>
+                        <a href="system_configuration.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Configuration
+                        </a>
+                        <a href="analytics_reports.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Analytics
+                        </a>
+                        <a href="alert_management.html" class="bg-primary-100 text-primary px-3 py-2 rounded-md text-sm font-medium">
+                            Alerts
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-text-primary p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
+                <a href="live_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Live Monitoring
+                </a>
+                <a href="system_configuration.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Configuration
+                </a>
+                <a href="analytics_reports.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Analytics
+                </a>
+                <a href="alert_management.html" class="bg-primary-100 text-primary block px-3 py-2 rounded-md text-base font-medium">
+                    Alerts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-text-primary">Alert Management</h2>
+                <p class="text-text-secondary mt-1">Monitor and respond to real-time safety alerts and crowd density warnings</p>
+            </div>
+            
+            <!-- Emergency Response Button -->
+            <div class="flex items-center space-x-3">
+                <button id="emergency-response-btn" class="btn bg-error text-white hover:bg-error-600 px-6 py-3 rounded-lg font-medium shadow-elevated">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    Emergency Response
+                </button>
+                <button id="export-reports-btn" class="btn btn-secondary">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    Export Reports
+                </button>
+            </div>
+        </div>
+
+        <!-- Alert Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-error-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-error" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Critical Alerts</p>
+                        <p class="text-2xl font-semibold text-text-primary font-mono">3</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-warning-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Warning Alerts</p>
+                        <p class="text-2xl font-semibold text-text-primary font-mono">7</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-success-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Resolved Today</p>
+                        <p class="text-2xl font-semibold text-text-primary font-mono">12</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Active Monitors</p>
+                        <p class="text-2xl font-semibold text-text-primary font-mono">8</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="card p-6 mb-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <!-- Severity Filter -->
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-text-secondary">Severity:</label>
+                        <select id="severity-filter" class="input w-32">
+                            <option value="all">All Levels</option>
+                            <option value="critical">Critical</option>
+                            <option value="warning">Warning</option>
+                            <option value="info">Info</option>
+                        </select>
+                    </div>
+
+                    <!-- Location Filter -->
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-text-secondary">Location:</label>
+                        <select id="location-filter" class="input w-40">
+                            <option value="all">All Locations</option>
+                            <option value="main-entrance">Main Entrance</option>
+                            <option value="food-court">Food Court</option>
+                            <option value="parking-area">Parking Area</option>
+                            <option value="emergency-exits">Emergency Exits</option>
+                        </select>
+                    </div>
+
+                    <!-- Time Range Filter -->
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-text-secondary">Time Range:</label>
+                        <select id="time-filter" class="input w-32">
+                            <option value="1h">Last Hour</option>
+                            <option value="24h">Last 24h</option>
+                            <option value="7d">Last 7 days</option>
+                            <option value="30d">Last 30 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Search and Actions -->
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <input type="text" id="search-alerts" placeholder="Search alerts..." class="input pl-10 w-64" />
+                        <svg class="w-4 h-4 text-text-secondary absolute left-3 top-1/2 transform -translate-y-1/2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <button id="bulk-actions-btn" class="btn btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"/>
+                    </svg>
+                    Bulk Actions
+                </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Alerts Table -->
+        <div class="card mb-6">
+            <div class="px-6 py-4 border-b border-border">
+                <h3 class="text-lg font-semibold text-text-primary">Active Alerts</h3>
+                <p class="text-sm text-text-secondary mt-1">Current warnings and notifications requiring attention</p>
+            </div>
+            
+            <!-- Desktop Table View -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="w-4">
+                                <input type="checkbox" id="select-all" class="rounded border-border" />
+                            </th>
+                            <th>Alert ID</th>
+                            <th>Severity</th>
+                            <th>Location</th>
+                            <th>Alert Type</th>
+                            <th>Crowd Count</th>
+                            <th>Risk Level</th>
+                            <th>Timestamp</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alerts-table-body">
+                        <!-- Alert Row 1 - Critical -->
+                        <tr class="alert-row" data-severity="critical">
+                            <td>
+                                <input type="checkbox" class="alert-checkbox rounded border-border" />
+                            </td>
+                            <td class="font-mono text-sm">#ALT-2025-001</td>
+                            <td>
+                                <span class="status-pill status-pill-error">
+                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    CRITICAL
+                                </span>
+                            </td>
+                            <td>Main Entrance</td>
+                            <td>Crowd Density Breach</td>
+                            <td class="font-mono">127 people</td>
+                            <td>
+                                <span class="status-pill status-pill-error">HIGH RISK</span>
+                            </td>
+                            <td class="font-mono text-sm">2025-09-25 17:45:12</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="btn-action acknowledge-btn" data-alert-id="ALT-2025-001">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="btn-action escalate-btn" data-alert-id="ALT-2025-001">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 14a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Alert Row 2 - Critical -->
+                        <tr class="alert-row" data-severity="critical">
+                            <td>
+                                <input type="checkbox" class="alert-checkbox rounded border-border" />
+                            </td>
+                            <td class="font-mono text-sm">#ALT-2025-002</td>
+                            <td>
+                                <span class="status-pill status-pill-error">
+                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    CRITICAL
+                                </span>
+                            </td>
+                            <td>Emergency Exits</td>
+                            <td>Exit Blockage Detected</td>
+                            <td class="font-mono">N/A</td>
+                            <td>
+                                <span class="status-pill status-pill-error">CRITICAL</span>
+                            </td>
+                            <td class="font-mono text-sm">2025-09-25 17:42:08</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="btn-action acknowledge-btn" data-alert-id="ALT-2025-002">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="btn-action escalate-btn" data-alert-id="ALT-2025-002">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 14a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Alert Row 3 - Warning -->
+                        <tr class="alert-row" data-severity="warning">
+                            <td>
+                                <input type="checkbox" class="alert-checkbox rounded border-border" />
+                            </td>
+                            <td class="font-mono text-sm">#ALT-2025-003</td>
+                            <td>
+                                <span class="status-pill status-pill-warning">
+                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                    WARNING
+                                </span>
+                            </td>
+                            <td>Food Court</td>
+                            <td>High Density Warning</td>
+                            <td class="font-mono">89 people</td>
+                            <td>
+                                <span class="status-pill status-pill-warning">MODERATE</span>
+                            </td>
+                            <td class="font-mono text-sm">2025-09-25 17:38:45</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="btn-action acknowledge-btn" data-alert-id="ALT-2025-003">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="btn-action resolve-btn" data-alert-id="ALT-2025-003">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Alert Row 4 - Warning -->
+                        <tr class="alert-row" data-severity="warning">
+                            <td>
+                                <input type="checkbox" class="alert-checkbox rounded border-border" />
+                            </td>
+                            <td class="font-mono text-sm">#ALT-2025-004</td>
+                            <td>
+                                <span class="status-pill status-pill-warning">
+                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                    WARNING
+                                </span>
+                            </td>
+                            <td>Parking Area</td>
+                            <td>Movement Speed Alert</td>
+                            <td class="font-mono">45 people</td>
+                            <td>
+                                <span class="status-pill status-pill-warning">MODERATE</span>
+                            </td>
+                            <td class="font-mono text-sm">2025-09-25 17:35:22</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="btn-action acknowledge-btn" data-alert-id="ALT-2025-004">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="btn-action resolve-btn" data-alert-id="ALT-2025-004">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Card View -->
+            <div class="md:hidden space-y-4 p-4" id="mobile-alerts">
+                <!-- Mobile Alert Card 1 -->
+                <div class="card p-4 border-l-4 border-l-error">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="status-pill status-pill-error text-xs">CRITICAL</span>
+                            <p class="font-mono text-sm text-text-secondary mt-1">#ALT-2025-001</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-text-secondary">2025-09-25</p>
+                            <p class="text-xs text-text-secondary">17:45:12</p>
+                        </div>
+                    </div>
+                    <h4 class="font-medium text-text-primary mb-2">Crowd Density Breach</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                        <div>
+                            <span class="text-text-secondary">Location:</span>
+                            <span class="text-text-primary ml-1">Main Entrance</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Count:</span>
+                            <span class="text-text-primary ml-1 font-mono">127 people</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="btn btn-primary flex-1 text-xs py-2">Acknowledge</button>
+                        <button class="btn bg-error text-white hover:bg-error-600 flex-1 text-xs py-2">Escalate</button>
+                    </div>
+                </div>
+
+                <!-- Mobile Alert Card 2 -->
+                <div class="card p-4 border-l-4 border-l-warning">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="status-pill status-pill-warning text-xs">WARNING</span>
+                            <p class="font-mono text-sm text-text-secondary mt-1">#ALT-2025-003</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-text-secondary">2025-09-25</p>
+                            <p class="text-xs text-text-secondary">17:38:45</p>
+                        </div>
+                    </div>
+                    <h4 class="font-medium text-text-primary mb-2">High Density Warning</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                        <div>
+                            <span class="text-text-secondary">Location:</span>
+                            <span class="text-text-primary ml-1">Food Court</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Count:</span>
+                            <span class="text-text-primary ml-1 font-mono">89 people</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="btn btn-primary flex-1 text-xs py-2">Acknowledge</button>
+                        <button class="btn btn-secondary flex-1 text-xs py-2">Resolve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Configuration Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Threshold Settings -->
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Alert Configuration</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary mb-2">Crowd Density Threshold</label>
+                        <div class="flex items-center space-x-4">
+                            <input type="range" id="density-threshold" min="50" max="200" value="100" class="flex-1" />
+                            <span id="density-value" class="font-mono text-sm text-text-primary w-16">100</span>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">People count that triggers density alerts</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary mb-2">Risk Assessment Level</label>
+                        <select class="input w-full">
+                            <option value="conservative">Conservative</option>
+                            <option value="moderate" selected>Moderate</option>
+                            <option value="aggressive">Aggressive</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary mb-2">Auto-Escalation Time</label>
+                        <select class="input w-full">
+                            <option value="5">5 minutes</option>
+                            <option value="10" selected>10 minutes</option>
+                            <option value="15">15 minutes</option>
+                            <option value="30">30 minutes</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" id="auto-notifications" checked class="rounded border-border" />
+                        <label for="auto-notifications" class="text-sm text-text-secondary">Enable automatic notifications</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Escalation Controls -->
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Emergency Controls</h3>
+                <div class="space-y-4">
+                    <button class="btn bg-error text-white hover:bg-error-600 w-full py-3">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                        </svg>
+                        Emergency Contact
+                    </button>
+
+                    <button class="btn bg-warning text-white hover:bg-warning-600 w-full py-3">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        Activate Evacuation Protocol
+                    </button>
+
+                    <button class="btn btn-secondary w-full py-3">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 8A6 6 0 006.025.25 6.023 6.023 0 00.25 6.025 6 6 0 008 18Z" clip-rule="evenodd"/>
+                        </svg>
+                        Broadcast Announcement
+                    </button>
+
+                    <div class="mt-4 p-4 bg-secondary-100 rounded-lg">
+                        <h4 class="font-medium text-text-primary mb-2">Emergency Contacts</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Security Team:</span>
+                                <span class="font-mono text-text-primary">+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Fire Department:</span>
+                                <span class="font-mono text-text-primary">911</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-text-secondary">Medical Emergency:</span>
+                                <span class="font-mono text-text-primary">911</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Alerts Section -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-text-primary">Historical Alerts</h3>
+                <div class="flex items-center space-x-2">
+                    <input type="text" placeholder="Search history..." class="input w-48" />
+                    <button class="btn btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Historical Alert 1 -->
+                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <span class="status-pill status-pill-success">RESOLVED</span>
+                        <div>
+                            <p class="font-medium text-text-primary">#ALT-2025-000</p>
+                            <p class="text-sm text-text-secondary">High density warning - Food Court</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-text-primary">Resolved in 8 minutes</p>
+                        <p class="text-xs text-text-secondary font-mono">2025-09-25 17:15:30</p>
+                    </div>
+                </div>
+
+                <!-- Historical Alert 2 -->
+                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <span class="status-pill status-pill-success">RESOLVED</span>
+                        <div>
+                            <p class="font-medium text-text-primary">#ALT-2025-999</p>
+                            <p class="text-sm text-text-secondary">Movement speed alert - Parking Area</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-text-primary">Resolved in 12 minutes</p>
+                        <p class="text-xs text-text-secondary font-mono">2025-09-25 16:45:15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 id="modal-title" class="text-lg font-semibold text-text-primary mb-4">Confirm Action</h3>
+            <p id="modal-message" class="text-text-secondary mb-6">Are you sure you want to perform this action?</p>
+            <div class="flex space-x-3">
+                <button id="modal-cancel" class="btn btn-secondary flex-1">Cancel</button>
+                <button id="modal-confirm" class="btn btn-primary flex-1">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedAlerts = [];
+        let currentAction = null;
+
+        // DOM elements
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const alertCheckboxes = document.querySelectorAll('.alert-checkbox');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCancel = document.getElementById('modal-cancel');
+        const modalConfirm = document.getElementById('modal-confirm');
+
+        // Filter elements
+        const severityFilter = document.getElementById('severity-filter');
+        const locationFilter = document.getElementById('location-filter');
+        const timeFilter = document.getElementById('time-filter');
+        const searchInput = document.getElementById('search-alerts');
+
+        // Configuration elements
+        const densityThreshold = document.getElementById('density-threshold');
+        const densityValue = document.getElementById('density-value');
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Select all functionality
+        selectAllCheckbox.addEventListener('change', (e) => {
+            alertCheckboxes.forEach(checkbox => {
+                checkbox.checked = e.target.checked;
+            });
+            updateSelectedAlerts();
+        });
+
+        // Individual checkbox handling
+        alertCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectedAlerts);
+        });
+
+        // Update selected alerts array
+        function updateSelectedAlerts() {
+            selectedAlerts = Array.from(alertCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.closest('tr').querySelector('.font-mono').textContent);
+            
+            // Update select all checkbox state
+            if (selectedAlerts.length === 0) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = false;
+            } else if (selectedAlerts.length === alertCheckboxes.length) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = true;
+            } else {
+                selectAllCheckbox.indeterminate = true;
+            }
+        }
+
+        // Show confirmation modal
+        function showConfirmationModal(title, message, action) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            currentAction = action;
+            confirmationModal.classList.remove('hidden');
+            confirmationModal.classList.add('flex');
+        }
+
+        // Hide confirmation modal
+        function hideConfirmationModal() {
+            confirmationModal.classList.add('hidden');
+            confirmationModal.classList.remove('flex');
+            currentAction = null;
+        }
+
+        // Modal event listeners
+        modalCancel.addEventListener('click', hideConfirmationModal);
+        modalConfirm.addEventListener('click', () => {
+            if (currentAction) {
+                currentAction();
+            }
+            hideConfirmationModal();
+        });
+
+        // Close modal on backdrop click
+        confirmationModal.addEventListener('click', (e) => {
+            if (e.target === confirmationModal) {
+                hideConfirmationModal();
+            }
+        });
+
+        // Acknowledge alert function
+        function acknowledgeAlert(alertId) {
+            console.log(`Acknowledging alert: ${alertId}`);
+            showAlert(`Alert ${alertId} acknowledged successfully`, 'success');
+            
+            // Remove alert from active list (simulate)
+            const alertRow = document.querySelector(`[data-alert-id="${alertId}"]`).closest('tr');
+            if (alertRow) {
+                alertRow.style.opacity = '0.5';
+                alertRow.querySelector('.status-pill').textContent = 'ACKNOWLEDGED';
+                alertRow.querySelector('.status-pill').className = 'status-pill status-pill-success';
+            }
+        }
+
+        // Escalate alert function
+        function escalateAlert(alertId) {
+            console.log(`Escalating alert: ${alertId}`);
+            showAlert(`Alert ${alertId} escalated to emergency response team`, 'warning');
+        }
+
+        // Resolve alert function
+        function resolveAlert(alertId) {
+            console.log(`Resolving alert: ${alertId}`);
+            showAlert(`Alert ${alertId} marked as resolved`, 'success');
+            
+            // Remove alert from active list (simulate)
+            const alertRow = document.querySelector(`[data-alert-id="${alertId}"]`).closest('tr');
+            if (alertRow) {
+                alertRow.remove();
+            }
+        }
+
+        // Show alert notification
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} animate-slide-in fixed top-4 right-4 z-50 max-w-sm`;
+            alertDiv.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Action button event listeners
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.acknowledge-btn')) {
+                const alertId = e.target.closest('.acknowledge-btn').dataset.alertId;
+                showConfirmationModal(
+                    'Acknowledge Alert',
+                    `Are you sure you want to acknowledge alert ${alertId}?`,
+                    () => acknowledgeAlert(alertId)
+                );
+            }
+            
+            if (e.target.closest('.escalate-btn')) {
+                const alertId = e.target.closest('.escalate-btn').dataset.alertId;
+                showConfirmationModal(
+                    'Escalate Alert',
+                    `Are you sure you want to escalate alert ${alertId} to emergency response?`,
+                    () => escalateAlert(alertId)
+                );
+            }
+            
+            if (e.target.closest('.resolve-btn')) {
+                const alertId = e.target.closest('.resolve-btn').dataset.alertId;
+                showConfirmationModal(
+                    'Resolve Alert',
+                    `Are you sure you want to mark alert ${alertId} as resolved?`,
+                    () => resolveAlert(alertId)
+                );
+            }
+        });
+
+        // Emergency response button
+        document.getElementById('emergency-response-btn').addEventListener('click', () => {
+            showConfirmationModal(
+                'Emergency Response',
+                'This will activate emergency protocols and notify all response teams. Continue?',
+                () => {
+                    showAlert('Emergency response protocol activated! All teams notified.', 'error');
+                    console.log('Emergency response activated');
+                }
+            );
+        });
+
+        // Export reports button
+        document.getElementById('export-reports-btn').addEventListener('click', () => {
+            const reportData = `SafeCrowd Alert Management Report
+Generated: ${new Date().toISOString()}
+
+Active Alerts: 4
+Critical: 2
+Warning: 2
+Resolved Today: 12
+
+Recent Alerts:
+- ALT-2025-001: Crowd Density Breach (Critical)
+- ALT-2025-002: Exit Blockage Detected (Critical)
+- ALT-2025-003: High Density Warning (Warning)
+- ALT-2025-004: Movement Speed Alert (Warning)
+`;
+            
+            const blob = new Blob([reportData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `safecrowd-alert-report-${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showAlert('Alert report exported successfully', 'success');
+        });
+
+        // Bulk actions button
+        document.getElementById('bulk-actions-btn').addEventListener('click', () => {
+            if (selectedAlerts.length === 0) {
+                showAlert('Please select alerts to perform bulk actions', 'warning');
+                return;
+            }
+            
+            showConfirmationModal(
+                'Bulk Actions',
+                `Perform bulk action on ${selectedAlerts.length} selected alerts?`,
+                () => {
+                    showAlert(`Bulk action performed on ${selectedAlerts.length} alerts`, 'success');
+                    selectedAlerts = [];
+                    updateSelectedAlerts();
+                }
+            );
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const severity = severityFilter.value;
+            const location = locationFilter.value;
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const alertRows = document.querySelectorAll('.alert-row');
+            
+            alertRows.forEach(row => {
+                const rowSeverity = row.dataset.severity;
+                const rowLocation = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                const rowText = row.textContent.toLowerCase();
+                
+                const severityMatch = severity === 'all' || rowSeverity === severity;
+                const locationMatch = location === 'all' || rowLocation.includes(location.replace('-', ' '));
+                const searchMatch = searchTerm === '' || rowText.includes(searchTerm);
+                
+                if (severityMatch && locationMatch && searchMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter event listeners
+        severityFilter.addEventListener('change', applyFilters);
+        locationFilter.addEventListener('change', applyFilters);
+        timeFilter.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+
+        // Density threshold slider
+        densityThreshold.addEventListener('input', (e) => {
+            densityValue.textContent = e.target.value;
+        });
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Alert Management System initialized');
+            showAlert('Alert Management System loaded successfully', 'success');
+        });
+
+        // Add button action styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .btn-action {
+                @apply p-2 rounded-md transition-smooth border border-border hover:bg-secondary-100;
+                color: var(--color-text-secondary);
+            }
+            
+            .btn-action:hover {
+                color: var(--color-text-primary);
+                transform: translateY(-1px);
+            }
+            
+            .acknowledge-btn:hover {
+                background-color: var(--color-success-100);
+                color: var(--color-success-600);
+                border-color: var(--color-success-600);
+            }
+            
+            .escalate-btn:hover {
+                background-color: var(--color-error-100);
+                color: var(--color-error-600);
+                border-color: var(--color-error-600);
+            }
+            
+            .resolve-btn:hover {
+                background-color: var(--color-primary-100);
+                color: var(--color-primary-600);
+                border-color: var(--color-primary-600);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

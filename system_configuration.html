@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Configuration - SafeCrowd Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsafecrowd6649back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-subtle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">SafeCrowd</h1>
+                        <p class="text-xs text-text-secondary">Management System</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="live_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Live Monitoring
+                        </a>
+                        <a href="system_configuration.html" class="bg-primary-100 text-primary px-3 py-2 rounded-md text-sm font-medium">
+                            Configuration
+                        </a>
+                        <a href="analytics_reports.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Analytics
+                        </a>
+                        <a href="alert_management.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 px-3 py-2 rounded-md text-sm font-medium transition-smooth">
+                            Alerts
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-text-primary p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
+                <a href="live_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Live Monitoring
+                </a>
+                <a href="system_configuration.html" class="bg-primary-100 text-primary block px-3 py-2 rounded-md text-base font-medium">
+                    Configuration
+                </a>
+                <a href="analytics_reports.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Analytics
+                </a>
+                <a href="alert_management.html" class="text-text-secondary hover:text-text-primary hover:bg-secondary-100 block px-3 py-2 rounded-md text-base font-medium">
+                    Alerts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-text-primary">System Configuration</h2>
+                    <p class="text-text-secondary mt-1">Customize monitoring parameters and detection settings for optimal performance</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button id="reset-defaults-btn" class="btn btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                        </svg>
+                        Reset to Defaults
+                    </button>
+                    <button id="save-config-btn" class="btn btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Save Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div id="alert-container" class="mb-6 space-y-2">
+            <!-- Alerts will be dynamically inserted here -->
+        </div>
+
+        <!-- Configuration Tabs -->
+        <div class="card">
+            <!-- Tab Navigation -->
+            <div class="border-b border-border">
+                <nav class="flex space-x-8 px-6 pt-6" aria-label="Tabs">
+                    <button id="tab-detection" class="tab-button active" data-tab="detection">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Detection Settings
+                    </button>
+                    <button id="tab-camera" class="tab-button" data-tab="camera">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                        </svg>
+                        Camera Settings
+                    </button>
+                    <button id="tab-alerts" class="tab-button" data-tab="alerts">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        Alert Configuration
+                    </button>
+                    <button id="tab-safety" class="tab-button" data-tab="safety">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Safety Parameters
+                    </button>
+                    <button id="tab-export" class="tab-button" data-tab="export">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        Export Settings
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="p-6">
+                <!-- Detection Settings Tab -->
+                <div id="detection-content" class="tab-content active">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Detection Parameters</h3>
+                            <button id="test-detection-btn" class="btn btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                                Test Settings
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Detection Sensitivity -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Detection Sensitivity</label>
+                                    <div class="space-y-2">
+                                        <input type="range" id="detection-sensitivity" class="w-full h-2 bg-secondary-200 rounded-lg appearance-none cursor-pointer" min="0" max="100" value="75" />
+                                        <div class="flex justify-between text-xs text-text-secondary">
+                                            <span>Low (0%)</span>
+                                            <span id="sensitivity-value" class="font-mono text-primary">75%</span>
+                                            <span>High (100%)</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-text-secondary mt-1">Higher sensitivity detects more objects but may increase false positives</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Confidence Threshold</label>
+                                    <div class="space-y-2">
+                                        <input type="range" id="confidence-threshold" class="w-full h-2 bg-secondary-200 rounded-lg appearance-none cursor-pointer" min="0" max="100" value="60" />
+                                        <div class="flex justify-between text-xs text-text-secondary">
+                                            <span>Low (0%)</span>
+                                            <span id="confidence-value" class="font-mono text-primary">60%</span>
+                                            <span>High (100%)</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-text-secondary mt-1">Minimum confidence level required for person detection</p>
+                                </div>
+                            </div>
+
+                            <!-- Crowd Density Thresholds -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="low-density" class="block text-sm font-medium text-text-primary mb-2">Low Density Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="low-density" class="input flex-1" value="5" min="1" max="50" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="medium-density" class="block text-sm font-medium text-text-primary mb-2">Medium Density Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="medium-density" class="input flex-1" value="15" min="1" max="100" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="high-density" class="block text-sm font-medium text-text-primary mb-2">High Density Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="high-density" class="input flex-1" value="25" min="1" max="200" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detection Options -->
+                        <div class="border-t border-border pt-6">
+                            <h4 class="text-md font-medium text-text-primary mb-4">Detection Options</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="face-detection" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                    <span class="text-sm text-text-primary">Enable Face Detection</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="movement-tracking" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                    <span class="text-sm text-text-primary">Track Movement Patterns</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="crowd-flow" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                    <span class="text-sm text-text-primary">Analyze Crowd Flow</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="anomaly-detection" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                    <span class="text-sm text-text-primary">Anomaly Detection</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Settings Tab -->
+                <div id="camera-content" class="tab-content">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Camera Configuration</h3>
+                            <button id="preview-camera-btn" class="btn btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Preview Settings
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Video Quality Settings -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="resolution" class="block text-sm font-medium text-text-primary mb-2">Video Resolution</label>
+                                    <select id="resolution" class="input">
+                                        <option value="640x480">640x480 (VGA)</option>
+                                        <option value="1280x720" selected>1280x720 (HD)</option>
+                                        <option value="1920x1080">1920x1080 (Full HD)</option>
+                                        <option value="2560x1440">2560x1440 (2K)</option>
+                                    </select>
+                                    <p class="text-xs text-text-secondary mt-1">Higher resolution improves detection accuracy but requires more bandwidth</p>
+                                </div>
+
+                                <div>
+                                    <label for="frame-rate" class="block text-sm font-medium text-text-primary mb-2">Frame Rate</label>
+                                    <select id="frame-rate" class="input">
+                                        <option value="15">15 FPS</option>
+                                        <option value="24">24 FPS</option>
+                                        <option value="30" selected>30 FPS</option>
+                                        <option value="60">60 FPS</option>
+                                    </select>
+                                    <p class="text-xs text-text-secondary mt-1">Higher frame rates provide smoother video but increase processing load</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Video Quality</label>
+                                    <div class="space-y-2">
+                                        <input type="range" id="video-quality" class="w-full h-2 bg-secondary-200 rounded-lg appearance-none cursor-pointer" min="1" max="10" value="7" />
+                                        <div class="flex justify-between text-xs text-text-secondary">
+                                            <span>Low (1)</span>
+                                            <span id="quality-value" class="font-mono text-primary">7</span>
+                                            <span>High (10)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Camera Controls -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Brightness</label>
+                                    <div class="space-y-2">
+                                        <input type="range" id="brightness" class="w-full h-2 bg-secondary-200 rounded-lg appearance-none cursor-pointer" min="-100" max="100" value="0" />
+                                        <div class="flex justify-between text-xs text-text-secondary">
+                                            <span>Dark (-100)</span>
+                                            <span id="brightness-value" class="font-mono text-primary">0</span>
+                                            <span>Bright (+100)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Contrast</label>
+                                    <div class="space-y-2">
+                                        <input type="range" id="contrast" class="w-full h-2 bg-secondary-200 rounded-lg appearance-none cursor-pointer" min="-100" max="100" value="0" />
+                                        <div class="flex justify-between text-xs text-text-secondary">
+                                            <span>Low (-100)</span>
+                                            <span id="contrast-value" class="font-mono text-primary">0</span>
+                                            <span>High (+100)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="auto-focus" class="flex items-center space-x-3">
+                                        <input type="checkbox" id="auto-focus" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                        <span class="text-sm text-text-primary">Auto Focus</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label for="auto-exposure" class="flex items-center space-x-3">
+                                        <input type="checkbox" id="auto-exposure" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                        <span class="text-sm text-text-primary">Auto Exposure</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Camera Preview -->
+                        <div class="border-t border-border pt-6">
+                            <h4 class="text-md font-medium text-text-primary mb-4">Camera Preview</h4>
+                            <div class="bg-secondary-900 rounded-lg aspect-video flex items-center justify-center">
+                                <div class="text-center">
+                                    <svg class="w-16 h-16 text-secondary-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                    </svg>
+                                    <p class="text-secondary-400">Camera Preview</p>
+                                    <p class="text-secondary-500 text-sm mt-1">Click "Preview Settings" to test configuration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert Configuration Tab -->
+                <div id="alerts-content" class="tab-content">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Alert Configuration</h3>
+                            <button id="test-alerts-btn" class="btn btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                Test Alerts
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Notification Thresholds -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Notification Thresholds</h4>
+                                
+                                <div>
+                                    <label for="crowd-alert-threshold" class="block text-sm font-medium text-text-primary mb-2">Crowd Alert Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="crowd-alert-threshold" class="input flex-1" value="20" min="1" max="500" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="emergency-threshold" class="block text-sm font-medium text-text-primary mb-2">Emergency Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="emergency-threshold" class="input flex-1" value="50" min="1" max="1000" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="alert-frequency" class="block text-sm font-medium text-text-primary mb-2">Alert Frequency</label>
+                                    <select id="alert-frequency" class="input">
+                                        <option value="immediate">Immediate</option>
+                                        <option value="30s">Every 30 seconds</option>
+                                        <option value="1m" selected>Every minute</option>
+                                        <option value="5m">Every 5 minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Emergency Contacts -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Emergency Contacts</h4>
+                                
+                                <div>
+                                    <label for="primary-contact" class="block text-sm font-medium text-text-primary mb-2">Primary Contact Email</label>
+                                    <input type="email" id="primary-contact" class="input" value="security@safecrowd.com" placeholder="Enter email address" />
+                                </div>
+
+                                <div>
+                                    <label for="secondary-contact" class="block text-sm font-medium text-text-primary mb-2">Secondary Contact Email</label>
+                                    <input type="email" id="secondary-contact" class="input" value="manager@safecrowd.com" placeholder="Enter email address" />
+                                </div>
+
+                                <div>
+                                    <label for="emergency-phone" class="block text-sm font-medium text-text-primary mb-2">Emergency Phone</label>
+                                    <input type="tel" id="emergency-phone" class="input" value="+1-555-0123" placeholder="Enter phone number" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Automated Response -->
+                        <div class="border-t border-border pt-6">
+                            <h4 class="text-md font-medium text-text-primary mb-4">Automated Response</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="email-alerts" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                    <span class="text-sm text-text-primary">Send Email Alerts</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="sms-alerts" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                    <span class="text-sm text-text-primary">Send SMS Alerts</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="sound-alarm" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                    <span class="text-sm text-text-primary">Sound Alarm</span>
+                                </label>
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" id="auto-recording" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                    <span class="text-sm text-text-primary">Auto Record Events</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Parameters Tab -->
+                <div id="safety-content" class="tab-content">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Safety Parameters</h3>
+                            <button id="calculate-capacity-btn" class="btn btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-1H8v1a1 1 0 11-2 0v-3a1 1 0 011-1h6z" clip-rule="evenodd"/>
+                                </svg>
+                                Calculate Capacity
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Occupancy Limits -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Occupancy Limits</h4>
+                                
+                                <div>
+                                    <label for="max-occupancy" class="block text-sm font-medium text-text-primary mb-2">Maximum Occupancy</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="max-occupancy" class="input flex-1" value="100" min="1" max="10000" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                    <p class="text-xs text-text-secondary mt-1">Legal maximum capacity for the monitored area</p>
+                                </div>
+
+                                <div>
+                                    <label for="safe-occupancy" class="block text-sm font-medium text-text-primary mb-2">Safe Occupancy Level</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="safe-occupancy" class="input flex-1" value="80" min="1" max="10000" />
+                                        <span class="text-sm text-text-secondary">people</span>
+                                    </div>
+                                    <p class="text-xs text-text-secondary mt-1">Recommended safe capacity (80% of maximum)</p>
+                                </div>
+
+                                <div>
+                                    <label for="area-size" class="block text-sm font-medium text-text-primary mb-2">Area Size</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="area-size" class="input flex-1" value="500" min="1" max="100000" />
+                                        <span class="text-sm text-text-secondary">sq ft</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Evacuation Settings -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Evacuation Parameters</h4>
+                                
+                                <div>
+                                    <label for="exit-capacity" class="block text-sm font-medium text-text-primary mb-2">Total Exit Capacity</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="exit-capacity" class="input flex-1" value="120" min="1" max="1000" />
+                                        <span class="text-sm text-text-secondary">people/min</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="evacuation-time" class="block text-sm font-medium text-text-primary mb-2">Target Evacuation Time</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="evacuation-time" class="input flex-1" value="5" min="1" max="60" />
+                                        <span class="text-sm text-text-secondary">minutes</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="exit-count" class="block text-sm font-medium text-text-primary mb-2">Number of Exits</label>
+                                    <input type="number" id="exit-count" class="input" value="4" min="1" max="20" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk Assessment Criteria -->
+                        <div class="border-t border-border pt-6">
+                            <h4 class="text-md font-medium text-text-primary mb-4">Risk Assessment Criteria</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="low-risk" class="block text-sm font-medium text-text-primary mb-2">Low Risk Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="low-risk" class="input flex-1" value="40" min="1" max="100" />
+                                        <span class="text-sm text-text-secondary">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="medium-risk" class="block text-sm font-medium text-text-primary mb-2">Medium Risk Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="medium-risk" class="input flex-1" value="70" min="1" max="100" />
+                                        <span class="text-sm text-text-secondary">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="high-risk" class="block text-sm font-medium text-text-primary mb-2">High Risk Threshold</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="high-risk" class="input flex-1" value="90" min="1" max="100" />
+                                        <span class="text-sm text-text-secondary">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Settings Tab -->
+                <div id="export-content" class="tab-content">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Export & Backup Settings</h3>
+                            <button id="export-now-btn" class="btn btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                Export Now
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Log Format Settings -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Log Format Settings</h4>
+                                
+                                <div>
+                                    <label for="log-format" class="block text-sm font-medium text-text-primary mb-2">Export Format</label>
+                                    <select id="log-format" class="input">
+                                        <option value="csv">CSV (Comma Separated)</option>
+                                        <option value="json" selected>JSON (JavaScript Object)</option>
+                                        <option value="xml">XML (Extensible Markup)</option>
+                                        <option value="txt">TXT (Plain Text)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="date-format" class="block text-sm font-medium text-text-primary mb-2">Date Format</label>
+                                    <select id="date-format" class="input">
+                                        <option value="iso">ISO 8601 (2025-09-25T17:47:37Z)</option>
+                                        <option value="us" selected>US Format (09/25/2025 5:47 PM)</option>
+                                        <option value="eu">EU Format (25/09/2025 17:47)</option>
+                                        <option value="timestamp">Unix Timestamp</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Include Data Types</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center space-x-3">
+                                            <input type="checkbox" id="include-detections" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                            <span class="text-sm text-text-primary">Detection Events</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3">
+                                            <input type="checkbox" id="include-alerts" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                            <span class="text-sm text-text-primary">Alert Notifications</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3">
+                                            <input type="checkbox" id="include-system" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                            <span class="text-sm text-text-primary">System Messages</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3">
+                                            <input type="checkbox" id="include-config" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" />
+                                            <span class="text-sm text-text-primary">Configuration Changes</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Retention & Backup -->
+                            <div class="space-y-4">
+                                <h4 class="text-md font-medium text-text-primary">Data Retention & Backup</h4>
+                                
+                                <div>
+                                    <label for="retention-period" class="block text-sm font-medium text-text-primary mb-2">Data Retention Period</label>
+                                    <select id="retention-period" class="input">
+                                        <option value="7">7 days</option>
+                                        <option value="30" selected>30 days</option>
+                                        <option value="90">90 days</option>
+                                        <option value="365">1 year</option>
+                                        <option value="unlimited">Unlimited</option>
+                                    </select>
+                                    <p class="text-xs text-text-secondary mt-1">Older data will be automatically deleted</p>
+                                </div>
+
+                                <div>
+                                    <label for="backup-frequency" class="block text-sm font-medium text-text-primary mb-2">Backup Frequency</label>
+                                    <select id="backup-frequency" class="input">
+                                        <option value="hourly">Every Hour</option>
+                                        <option value="daily" selected>Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="manual">Manual Only</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="backup-location" class="block text-sm font-medium text-text-primary mb-2">Backup Location</label>
+                                    <input type="text" id="backup-location" class="input" value="/var/backups/safecrowd/" placeholder="Enter backup path" />
+                                </div>
+
+                                <div>
+                                    <label for="auto-cleanup" class="flex items-center space-x-3">
+                                        <input type="checkbox" id="auto-cleanup" class="w-4 h-4 text-primary border-border rounded focus:ring-primary" checked />
+                                        <span class="text-sm text-text-primary">Auto-cleanup old backups</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Export Status -->
+                        <div class="border-t border-border pt-6">
+                            <h4 class="text-md font-medium text-text-primary mb-4">Export Status</h4>
+                            <div class="bg-secondary-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-text-secondary">Last Export:</span>
+                                    <span class="text-sm font-mono text-text-primary">2025-09-25 16:30:15</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-text-secondary">Next Scheduled:</span>
+                                    <span class="text-sm font-mono text-text-primary">2025-09-26 00:00:00</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Export Status:</span>
+                                    <span class="status-pill status-pill-success">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Global variables
+        let currentTab = 'detection';
+        let configData = {
+            detection: {
+                sensitivity: 75,
+                confidence: 60,
+                lowDensity: 5,
+                mediumDensity: 15,
+                highDensity: 25,
+                faceDetection: true,
+                movementTracking: true,
+                crowdFlow: false,
+                anomalyDetection: false
+            },
+            camera: {
+                resolution: '1280x720',
+                frameRate: 30,
+                quality: 7,
+                brightness: 0,
+                contrast: 0,
+                autoFocus: true,
+                autoExposure: true
+            },
+            alerts: {
+                crowdThreshold: 20,
+                emergencyThreshold: 50,
+                frequency: '1m',
+                primaryContact: 'security@safecrowd.com',
+                secondaryContact: 'manager@safecrowd.com',
+                emergencyPhone: '+1-555-0123',
+                emailAlerts: true,
+                smsAlerts: false,
+                soundAlarm: false,
+                autoRecording: true
+            },
+            safety: {
+                maxOccupancy: 100,
+                safeOccupancy: 80,
+                areaSize: 500,
+                exitCapacity: 120,
+                evacuationTime: 5,
+                exitCount: 4,
+                lowRisk: 40,
+                mediumRisk: 70,
+                highRisk: 90
+            },
+            export: {
+                format: 'json',
+                dateFormat: 'us',
+                includeDetections: true,
+                includeAlerts: true,
+                includeSystem: false,
+                includeConfig: false,
+                retentionPeriod: 30,
+                backupFrequency: 'daily',
+                backupLocation: '/var/backups/safecrowd/',
+                autoCleanup: true
+            }
+        };
+
+        // DOM elements
+        const alertContainer = document.getElementById('alert-container');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Tab elements
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Control buttons
+        const saveConfigBtn = document.getElementById('save-config-btn');
+        const resetDefaultsBtn = document.getElementById('reset-defaults-btn');
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Show alert function
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} animate-slide-in`;
+            alertDiv.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            alertContainer.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Update tab buttons
+            tabButtons.forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update tab content
+            tabContents.forEach(content => {
+                if (content.id === `${tabName}-content`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            currentTab = tabName;
+        }
+
+        // Initialize tab event listeners
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                switchTab(button.dataset.tab);
+            });
+        });
+
+        // Range slider value updates
+        function initializeSliders() {
+            const sliders = [
+                { id: 'detection-sensitivity', valueId: 'sensitivity-value', suffix: '%' },
+                { id: 'confidence-threshold', valueId: 'confidence-value', suffix: '%' },
+                { id: 'video-quality', valueId: 'quality-value', suffix: '' },
+                { id: 'brightness', valueId: 'brightness-value', suffix: '' },
+                { id: 'contrast', valueId: 'contrast-value', suffix: '' }
+            ];
+
+            sliders.forEach(slider => {
+                const element = document.getElementById(slider.id);
+                const valueElement = document.getElementById(slider.valueId);
+                
+                if (element && valueElement) {
+                    element.addEventListener('input', (e) => {
+                        valueElement.textContent = e.target.value + slider.suffix;
+                    });
+                }
+            });
+        }
+
+        // Save configuration
+        function saveConfiguration() {
+            // Collect all form data
+            const formData = collectFormData();
+            
+            // Simulate API call
+            setTimeout(() => {
+                showAlert('Configuration saved successfully!', 'success');
+                console.log('Configuration saved:', formData);
+            }, 500);
+        }
+
+        // Reset to defaults
+        function resetToDefaults() {
+            if (confirm('Are you sure you want to reset all settings to default values? This action cannot be undone.')) {
+                // Reset all form fields to default values
+                resetFormFields();
+                showAlert('Settings reset to default values', 'warning');
+            }
+        }
+
+        // Collect form data
+        function collectFormData() {
+            const data = { ...configData };
+            
+            // Update with current form values
+            data.detection.sensitivity = parseInt(document.getElementById('detection-sensitivity').value);
+            data.detection.confidence = parseInt(document.getElementById('confidence-threshold').value);
+            data.detection.lowDensity = parseInt(document.getElementById('low-density').value);
+            data.detection.mediumDensity = parseInt(document.getElementById('medium-density').value);
+            data.detection.highDensity = parseInt(document.getElementById('high-density').value);
+            
+            // Add more field collections as needed
+            
+            return data;
+        }
+
+        // Reset form fields
+        function resetFormFields() {
+            // Reset sliders
+            document.getElementById('detection-sensitivity').value = 75;
+            document.getElementById('sensitivity-value').textContent = '75%';
+            document.getElementById('confidence-threshold').value = 60;
+            document.getElementById('confidence-value').textContent = '60%';
+            
+            // Reset number inputs
+            document.getElementById('low-density').value = 5;
+            document.getElementById('medium-density').value = 15;
+            document.getElementById('high-density').value = 25;
+            
+            // Reset checkboxes
+            document.getElementById('face-detection').checked = true;
+            document.getElementById('movement-tracking').checked = true;
+            document.getElementById('crowd-flow').checked = false;
+            document.getElementById('anomaly-detection').checked = false;
+            
+            // Reset other form fields as needed
+        }
+
+        // Test functions
+        function testDetectionSettings() {
+            showAlert('Testing detection settings...', 'info');
+            setTimeout(() => {
+                showAlert('Detection test completed successfully', 'success');
+            }, 2000);
+        }
+
+        function previewCameraSettings() {
+            showAlert('Loading camera preview...', 'info');
+            setTimeout(() => {
+                showAlert('Camera preview updated with new settings', 'success');
+            }, 1500);
+        }
+
+        function testAlerts() {
+            showAlert('Sending test alert...', 'info');
+            setTimeout(() => {
+                showAlert('Test alert sent successfully to configured contacts', 'success');
+            }, 2000);
+        }
+
+        function calculateCapacity() {
+            const areaSize = parseInt(document.getElementById('area-size').value);
+            const exitCount = parseInt(document.getElementById('exit-count').value);
+            
+            // Simple capacity calculation (2 sq ft per person)
+            const calculatedCapacity = Math.floor(areaSize / 2);
+            
+            document.getElementById('max-occupancy').value = calculatedCapacity;
+            document.getElementById('safe-occupancy').value = Math.floor(calculatedCapacity * 0.8);
+            
+            showAlert(`Calculated capacity: ${calculatedCapacity} people (${Math.floor(calculatedCapacity * 0.8)} safe capacity)`, 'success');
+        }
+
+        function exportNow() {
+            showAlert('Starting export process...', 'info');
+            setTimeout(() => {
+                showAlert('Data exported successfully to configured location', 'success');
+            }, 2000);
+        }
+
+        // Event listeners
+        saveConfigBtn.addEventListener('click', saveConfiguration);
+        resetDefaultsBtn.addEventListener('click', resetToDefaults);
+
+        // Test button event listeners
+        document.getElementById('test-detection-btn').addEventListener('click', testDetectionSettings);
+        document.getElementById('preview-camera-btn').addEventListener('click', previewCameraSettings);
+        document.getElementById('test-alerts-btn').addEventListener('click', testAlerts);
+        document.getElementById('calculate-capacity-btn').addEventListener('click', calculateCapacity);
+        document.getElementById('export-now-btn').addEventListener('click', exportNow);
+
+        // Form validation
+        function validateForm() {
+            const requiredFields = [
+                'primary-contact',
+                'emergency-phone',
+                'max-occupancy',
+                'exit-capacity'
+            ];
+
+            let isValid = true;
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('border-error');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-error');
+                }
+            });
+
+            return isValid;
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeSliders();
+            
+            // Add form validation on save
+            saveConfigBtn.addEventListener('click', (e) => {
+                if (!validateForm()) {
+                    e.preventDefault();
+                    showAlert('Please fill in all required fields', 'error');
+                    return;
+                }
+                saveConfiguration();
+            });
+        });
+
+        // Add CSS for tab functionality
+        const style = document.createElement('style');
+        style.textContent = `
+            .tab-button {
+                @apply flex items-center px-4 py-2 text-sm font-medium text-text-secondary border-b-2 border-transparent hover:text-text-primary hover:border-secondary-300 transition-smooth;
+            }
+            
+            .tab-button.active {
+                @apply text-primary border-primary;
+            }
+            
+            .tab-content {
+                display: none;
+            }
+            
+            .tab-content.active {
+                display: block;
+            }
+            
+            .border-error {
+                @apply border-error;
+            }
+            
+            /* Custom slider styles */
+            input[type="range"] {
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+                cursor: pointer;
+            }
+            
+            input[type="range"]::-webkit-slider-track {
+                background: #E2E8F0;
+                height: 8px;
+                border-radius: 4px;
+            }
+            
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                background: #2563EB;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            
+            input[type="range"]::-moz-range-track {
+                background: #E2E8F0;
+                height: 8px;
+                border-radius: 4px;
+                border: none;
+            }
+            
+            input[type="range"]::-moz-range-thumb {
+                background: #2563EB;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                cursor: pointer;
+                border: none;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
